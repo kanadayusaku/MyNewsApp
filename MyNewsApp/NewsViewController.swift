@@ -98,7 +98,7 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "title" {
+        if elementName == "item" {
             if titleString != ""{
                 elements.setObject(titleString, forKey: "title" as NSCopying)
             }
@@ -131,12 +131,26 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
         cell.textLabel?.textColor = UIColor.black
         
         //記事URLのサイズとフォント
+        cell.detailTextLabel?.text = (articles[indexPath.row] as AnyObject).value(forKey: "link") as? String
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 13)
         cell.detailTextLabel?.textColor = UIColor.gray
         
         return cell
     }
     //セルをタップした時の処理（未）
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let linkUrl = ((articles[indexPath.row]as
+        AnyObject).value(forKey: "link") as?
+        String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let urlStr =
+        (linkUrl?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
+        guard let url = URL(string: urlStr) else {
+            return
+        }
+        let urlRequest = NSURLRequest(url: url)
+        WebView.load(urlRequest as URLRequest)
+    }
+    
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         tableView.isHidden = true
