@@ -17,6 +17,7 @@
 		BA280F1022FF94C0009021D8 /* MyNewsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280F0F22FF94C0009021D8 /* MyNewsAppTests.swift */; };
 		BA280F1B22FF94C0009021D8 /* MyNewsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280F1A22FF94C0009021D8 /* MyNewsAppUITests.swift */; };
 		BA280F2922FFA9B5009021D8 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280F2822FFA9B5009021D8 /* NewsViewController.swift */; };
+		BA280F2B22FFBD5C009021D8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA280F2A22FFBD5C009021D8 /* WebKit.framework */; };
 		E6F4B094DF313C61EFA16DAF /* Pods_MyNewsAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399E0CA730B41D5F182A2549 /* Pods_MyNewsAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		BA280F1A22FF94C0009021D8 /* MyNewsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNewsAppUITests.swift; sourceTree = "<group>"; };
 		BA280F1C22FF94C0009021D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA280F2822FFA9B5009021D8 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		BA280F2A22FFBD5C009021D8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E354AE0FB3DEFDB36538440F /* Pods_MyNewsAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNewsAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -68,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA280F2B22FFBD5C009021D8 /* WebKit.framework in Frameworks */,
 				55C6E1E858ED969E246CE46D /* Pods_MyNewsApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +97,7 @@
 		42F6DF7DE9B6940FC2B8A539 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA280F2A22FFBD5C009021D8 /* WebKit.framework */,
 				51BC7624A324D3F5BED0A817 /* Pods_MyNewsApp.framework */,
 				E354AE0FB3DEFDB36538440F /* Pods_MyNewsAppTests.framework */,
 				399E0CA730B41D5F182A2549 /* Pods_MyNewsAppUITests.framework */,
