@@ -47,10 +47,7 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
         //デリゲートとの接続
         tableView.delegate = self
         tableView.dataSource = self
-        
-        //parserとの接続
-        parser.delegate = self
-
+    
         //navigationDelegateとの接続
         WebView.navigationDelegate = self
         
@@ -72,6 +69,8 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
         let urlToSend :URL = URL(string: url)!
         parser = XMLParser(contentsOf: urlToSend)!
         articles = []
+        //parserとの接続
+        parser.delegate = self
         //解析の実行
         parser.parse()
         //reload the tableView
@@ -127,6 +126,7 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
         cell.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
         
         //記事テキストサイズとフォント
+      cell.textLabel?.text = (articles[indexPath.row] as AnyObject).value(forKey: "title") as? String
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         cell.textLabel?.textColor = UIColor.black
         
@@ -160,7 +160,6 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
     @IBAction func refreshPage(_ sender: Any) {
         WebView.reload()
     }
-    
     
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
