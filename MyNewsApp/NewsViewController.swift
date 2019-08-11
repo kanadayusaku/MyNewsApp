@@ -22,9 +22,18 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
     //var articlrd = NSMutableDictionary()
     var articles:[Any] = []
     
+    //XML Fileに解析をかけた情報
+    var elements = NSMutableDictionary()
+    //information of XMLFile tag
+    var element: String = ""
+    //information of XMLTitle tag
+    var titleString: String = ""
+    //information of XMLLink tag
+    var linkString: String = ""
+    
     //webview
     @IBOutlet weak var WebView: WKWebView!
-    //
+    //Toolbar
     @IBOutlet weak var toolBar: UIToolbar!
     
     //urlを受け取る
@@ -54,6 +63,8 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
         //最初は隠す（tableviewが表示されるのを邪魔しないように）
         WebView.isHidden = true
         toolBar.isHidden = true
+        
+        parseUrl()
     }
     
 
@@ -67,10 +78,47 @@ class NewsViewController: UIViewController,IndicatorInfoProvider,UITableViewData
         tableView.reloadData()
     }
     
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+    //elementNameにタグの名前が入ってくるのでelementに代入
+        element = elementName
+        //エレメントに入ってきたら
+        if element == "item"{
+            //初期化  [:]←辞書型の初期化
+            elements = [:]
+            titleString = ""
+            linkString = ""
+        }
+    }
+    
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if element == "title" {
+            titleString.append(string)
+        } else if element == "link"{
+            linkString.append(string)
+        }
+    }
+    
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if elementName == "title" {
+            if titleString != ""{
+                elements.setObject(titleString, forKey: "title" as NSCopying)
+            }
+            if linkString != "" {
+                elements.setObject(linkString, forKey: "link" as NSCopying)
+            }
+           //articleの中にelementsをい入れる
+          articles.append(elements)
+        }
+    }
+    
     // セルの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)
         -> CGFloat {
             return 100
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView,cellForRowAt indexPath: IndexPath) -> UITableViewCell {
